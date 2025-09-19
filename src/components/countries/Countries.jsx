@@ -1,9 +1,19 @@
-import React from "react";
+import React, { use } from "react";
+import Country from "../Country/Country";
+import "./Countries.css";
 
-const Countries = () => {
+const Countries = ({ countriesPromise }) => {
+  const countriesApiData = use(countriesPromise);
+  const countriesData = countriesApiData.countries;
+  console.log(countriesData);
   return (
-    <div>
-      <h3>Bangladesh</h3>
+    <div className="countries">
+      {countriesData.map((countryDataLopingByMap) => (
+        <Country
+          key={countryDataLopingByMap.ccn3.ccn3}
+          getCountriesDataFromMap={countryDataLopingByMap}
+        ></Country>
+      ))}
     </div>
   );
 };
