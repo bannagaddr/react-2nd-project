@@ -12,7 +12,6 @@ const countriesPromise = fetch(
 function App() {
   return (
     <>
-      <h2>Country List:</h2>
       {/* when countries data is loading then showing this message */}
       <Suspense fallback={<p className={"loading"}>Countries Loading...</p>}>
         <Countries countriesPromise={countriesPromise}></Countries>

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "./Country.css";
 
-const Country = ({ getCountriesDataFromMap }) => {
+const Country = ({
+  getCountriesDataFromMap,
+  handleVisitedCountries,
+  handleVisitedFlags,
+}) => {
   // country visit event handler
   const [visited, setVisited] = useState(false);
   // country visit clicked function
@@ -18,9 +22,16 @@ const Country = ({ getCountriesDataFromMap }) => {
 
     // third system for toggling
     setVisited(!visited);
+
+    // countries visited handler
+    handleVisitedCountries(getCountriesDataFromMap);
   };
   return (
-    <div className="country">
+    <div
+      className={`country ${
+        visited ? "country-visited-btn" : "country-not-visited-btn"
+      }`}
+    >
       <img
         src={getCountriesDataFromMap.flags.flags.png}
         alt={getCountriesDataFromMap.flags.flags.alt}
@@ -49,6 +60,13 @@ const Country = ({ getCountriesDataFromMap }) => {
       </h3>
       <button onClick={visitHandler}>
         {visited ? "Visited" : "Not Visited"}
+      </button>
+      <button
+        onClick={() => {
+          handleVisitedFlags(getCountriesDataFromMap.flags.flags.png);
+        }}
+      >
+        Add Visited Flag
       </button>
     </div>
   );
